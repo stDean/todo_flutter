@@ -24,6 +24,7 @@ class DialogBox extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: 10),
               child: TextField(
+                autofocus: true,
                 controller: controller,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
