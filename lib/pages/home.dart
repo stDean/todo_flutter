@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "/component/dialog_box.dart";
 import "/component/todo_tile.dart";
 
 class HomePage extends StatefulWidget {
@@ -14,10 +15,36 @@ class _HomePageState extends State<HomePage> {
     ['Get a job', false],
   ];
 
+  final TextEditingController _myTextController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    _myTextController.dispose();
+    super.dispose();
+  }
+
   void checkBoxChange(bool? val, int index) {
     setState(() {
       todoList[index][1] = !todoList[index][1];
     });
+  }
+
+  void onSave() {
+    
+  }
+
+  void createNewTask() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return DialogBox(
+          controller: _myTextController,
+          onSave: onSave,
+          onCancel: () => Navigator.of(context).pop(),
+        );
+      },
+    );
   }
 
   @override
@@ -27,6 +54,10 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text("To Do".toUpperCase()),
         elevation: 0,
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: createNewTask,
+        child: const Icon(Icons.add),
       ),
       body: ListView.builder(
         itemCount: todoList.length,

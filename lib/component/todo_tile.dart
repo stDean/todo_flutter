@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 class TodoTile extends StatelessWidget {
   final String taskName;
   final bool taskCompleted;
-  Function(bool?)? onChange;
+  final Function(bool?)? onChange;
 
-  TodoTile({
+  const TodoTile({
     super.key,
     required this.taskName,
     required this.taskCompleted,
@@ -32,6 +32,7 @@ class TodoTile extends StatelessWidget {
             Text(
               taskName,
               style: TextStyle(
+                fontSize: 18,
                 decoration: taskCompleted
                     ? TextDecoration.lineThrough
                     : TextDecoration.none,
